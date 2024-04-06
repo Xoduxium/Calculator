@@ -16,8 +16,8 @@ def button_add():
     math = "+"
     f_num = float(first_num)
     input.delete(0, END)
-    global downatell
-    downatell = "True"
+    global down
+    down = "True"
 
 def button_equal():
     global second_num
@@ -36,9 +36,6 @@ def button_equal():
     if math == "/":
         input.insert(0, f_num / float(second_num))
     
-    if math == "¹/x":
-        input.insert(0, 1 / f_num)
-    
     Storia()
 
 def button_sub():
@@ -48,8 +45,8 @@ def button_sub():
     math = "-"
     f_num = float(first_num)
     input.delete(0, END)
-    global downatell
-    downatell = "True"
+    global down
+    down = "True"
 
 def button_mul():
     first_num = input.get()
@@ -58,8 +55,8 @@ def button_mul():
     math = "*"
     f_num = float(first_num)
     input.delete(0, END)
-    global downatell
-    downatell = "True"
+    global down
+    down = "True"
 
 def button_div():
     first_num = input.get()
@@ -68,8 +65,8 @@ def button_div():
     math = "/"
     f_num = float(first_num)
     input.delete(0, END)
-    global downatell
-    downatell = "True"
+    global down
+    down = "True"
 
 def button_sqr():
     first_num = input.get()
@@ -131,15 +128,15 @@ def button_Percen():
     Storia()
 
 history_text = ""
-downatell = ""
+down = ""
 
 def Storia():
     global history_text
     global f_num  # Include f_num to properly store the first number
-    global downatell
+    global down
 
     # Construct the history entry
-    if downatell == "True":
+    if down == "True":
         history_entry = f"{f_num} {math} {float(second_num)}"
 
     if math == "1 /":
@@ -170,6 +167,11 @@ def button_DelAll():
     history.delete(0, END)
     input.delete(0, END)
 
+def answer():
+    history.delete(0, END)
+    global history_text
+    history_text = ""
+
 # window
 window = Tk()
 window.title('Calculator')
@@ -188,33 +190,34 @@ history = Entry(window, width=25)
 history.grid(row=1, column=0, columnspan=4, padx=10, pady=10)
 
 # buttons
-button1 = Button(window, text="1", padx=20, pady=10, command=lambda: button_click(1))
-button2 = Button(window, text="2", padx=20, pady=10, command=lambda: button_click(2))
-button3 = Button(window, text="3", padx=20, pady=10, command=lambda: button_click(3))
+button1 = Button(window, text="1", padx=20, pady=10, command=lambda: button_click(1), bg='white')
+button2 = Button(window, text="2", padx=20, pady=10, command=lambda: button_click(2), bg='white')
+button3 = Button(window, text="3", padx=20, pady=10, command=lambda: button_click(3), bg='white')
 
-button4 = Button(window, text="4", padx=20, pady=10, command=lambda: button_click(4))
-button5 = Button(window, text="5", padx=20, pady=10, command=lambda: button_click(5))
-button6 = Button(window, text="6", padx=20, pady=10, command=lambda: button_click(6))
+button4 = Button(window, text="4", padx=20, pady=10, command=lambda: button_click(4), bg='white')
+button5 = Button(window, text="5", padx=20, pady=10, command=lambda: button_click(5), bg='white')
+button6 = Button(window, text="6", padx=20, pady=10, command=lambda: button_click(6), bg='white')
 
-button7 = Button(window, text="7", padx=20, pady=10, command=lambda: button_click(7))
-button8 = Button(window, text="8", padx=20, pady=10, command=lambda: button_click(8))
-button9 = Button(window, text="9", padx=20, pady=10, command=lambda: button_click(9))
-button0 = Button(window, text="0", padx=20, pady=10, command=lambda: button_click(0))
+button7 = Button(window, text="7", padx=20, pady=10, command=lambda: button_click(7), bg='white')
+button8 = Button(window, text="8", padx=20, pady=10, command=lambda: button_click(8), bg='white')
+button9 = Button(window, text="9", padx=20, pady=10, command=lambda: button_click(9), bg='white')
+button0 = Button(window, text="0", padx=20, pady=10, command=lambda: button_click(0), bg='white')
 
 buttonAdd = Button(window, text="+", padx=19, pady=10, command=button_add)
 buttonSub = Button(window, text="-", padx=20, pady=10, command=button_sub)
 buttonMul = Button(window, text="*", padx=20, pady=10, command=button_mul)
 buttonDiv = Button(window, text="/", padx=20, pady=10, command=button_div)
-buttonEqual = Button(window, text="=", padx=19, pady=10, command=button_equal)
+buttonEqual = Button(window, text="=", padx=19, pady=10, command=button_equal, bg='#0067C0', fg='white')
 buttonClear = Button(window, text="C", padx=19, pady=10, command=button_clear)
 buttonSqr = Button(window, text="x²", padx=18, pady=10, command=button_sqr)
 buttonRoot = Button(window, text="²√x", padx=14, pady=10, command=button_root)
-button1div = Button(window, text="¹/x", padx=15, pady=10, command=button_1div)
-buttonAssoluto = Button(window, text="+/-", padx=14, pady=10, command=button_Asso)
-buttonComma = Button(window, text=".", padx=22, pady=10, command=lambda: button_click("."))
+button1div = Button(window, text="¹/x", padx=16, pady=10, command=button_1div)
+buttonAssoluto = Button(window, text="+/-", padx=14, pady=10, command=button_Asso, bg='white')
+buttonComma = Button(window, text=".", padx=22, pady=10, command=lambda: button_click("."), bg='white')
 buttonBSpace = Button(window, text="←", padx=18, pady=10, command=button_BSpace)
 buttonPercentage = Button(window, text="%", padx=18, pady=10, command=button_Percen)
 buttonDelAll = Button(window, text="CE", padx=16, pady=10, command=button_DelAll)
+buttonANS = Button(window, text="Ans", padx=41, pady=10, command=answer, bg='#0A9627', fg='white')
 
 # Row 3
 buttonPercentage.grid(row=3, column=0) #
@@ -251,6 +254,9 @@ buttonAssoluto.grid(row=8, column=0) #
 button0.grid(row=8, column=1) #
 buttonComma.grid(row=8, column=2) #
 buttonEqual.grid(row=8, column=3) #
+
+# Row 9
+buttonANS.grid(row=9, column=0, columnspan=4)
 
 # run
 window.mainloop()
